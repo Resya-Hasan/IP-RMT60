@@ -29,7 +29,7 @@ app.use(authentication)
 app.get('/jobs', JobsController.getJobs)
 app.get('/jobs/:id', JobsController.getJobsById)
 
-app.post('/roadmaps/generate', RoadmapController.generateRoadmap)
+app.post('/roadmaps/generate/:id', RoadmapController.generateRoadmap)
 
 app.use(errorHandler)
 
