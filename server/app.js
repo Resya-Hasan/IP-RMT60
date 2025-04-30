@@ -26,6 +26,7 @@ app.post('/login', UserController.login)
 app.use(authentication)
 
 app.get('/jobs', JobsController.getJobs)
+app.get('/jobs/:id', JobsController.getJobsById)
 
 app.use(errorHandler)
 

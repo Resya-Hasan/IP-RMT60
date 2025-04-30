@@ -14,7 +14,30 @@ module.exports = class JobsController {
                 }
             })
 
-            res.status(200).json(response.data)
+            const top50 = response.data.data.slice(0, 50)
+
+            res.status(200).json(top50)
+        } catch(err) {
+            next(err)
+        }
+    }
+
+    static async getJobsById(req, res, next) {
+        try{
+            const token = await loginApi()
+            console.log(token)
+
+            const { id } = req.params
+
+            const response = await axios.get(`${process.env.BASE_URL_API}/apis/career-portal/jobs/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            const jobDetails = response.data.data
+
+            res.status(200).json(jobDetails)
         } catch(err) {
             next(err)
         }
