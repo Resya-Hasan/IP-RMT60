@@ -80,4 +80,24 @@ Ikuti **format JSON persis** seperti ini (dengan kunci yang **harus sama persis*
             next(err);
         }
     }
+
+    static async getRoadmapById(req, res, next) {
+        try {
+            const { id } = req.params;
+            const roadmap = await Roadmap.findOne({
+                where: {
+                    id,
+                    UserId: req.user.id,
+                },
+            });
+            
+            if (!roadmap) {
+                throw {name: 'notFound', message: 'Roadmap not found'}
+            }
+
+            res.status(200).json(roadmap);
+        } catch (err) {
+            next(err);
+        }
+    }
 };
