@@ -27,6 +27,7 @@ app.get('/jobs/:id', JobsController.getJobsById)
 app.post('/roadmaps/generate/:id', RoadmapController.generateRoadmap)
 app.get('/roadmaps', RoadmapController.getRoadmap)
 app.get('/roadmaps/:id', RoadmapController.getRoadmapById)
+app.delete('/roadmaps/:id', RoadmapController.deleteRoadmap)
 
 app.use(errorHandler)
 

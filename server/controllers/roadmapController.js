@@ -100,4 +100,31 @@ Ikuti **format JSON persis** seperti ini (dengan kunci yang **harus sama persis*
             next(err);
         }
     }
+
+    static async deleteRoadmap(req, res, next) {
+        try {
+            const { id } = req.params;
+            const roadmap = await Roadmap.findOne({
+                where: {
+                    id,
+                    UserId: req.user.id,
+                },
+            });
+
+            if (!roadmap) {
+                throw {name: 'notFound', message: 'Roadmap not found'}
+            }
+
+            await Roadmap.destroy({
+                where: {
+                    id,
+                    UserId: req.user.id,
+                },
+            });
+
+            res.status(200).json({ message: 'Roadmap deleted successfully' });
+        } catch (err) {
+            next(err);
+        }
+    }
 };
