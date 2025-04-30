@@ -5,6 +5,7 @@ const errorHandler = require('./middleware/errorHandler')
 const UserController = require('./controllers/userController')
 const authentication = require('./middleware/authentication')
 const JobsController = require('./controllers/jobsController')
+const RoadmapController = require('./controllers/roadmapController')
 const app = express()
 const port = 3000
 
@@ -27,6 +28,8 @@ app.use(authentication)
 
 app.get('/jobs', JobsController.getJobs)
 app.get('/jobs/:id', JobsController.getJobsById)
+
+app.post('/roadmaps/generate', RoadmapController.generateRoadmap)
 
 app.use(errorHandler)
 
