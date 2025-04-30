@@ -37,9 +37,9 @@ module.exports = class UserController {
 
             console.log(user)
 
-            const access_token = signToken({user})
+            const accessToken = signToken(user)
 
-            res.status(200).json({ access_token: access_token })
+            res.status(200).json({ access_token: accessToken })
         } catch(err) {
             next(err)
         }

@@ -15,6 +15,12 @@ const errorHandler = (err, req, res, next) => {
         })
     }
 
+    if (err.name === 'Unauthorized') {
+        return res.status(401).json({
+            message: err.message
+        })
+    }
+
     res.status(500).json({
         message: 'Internal Server Error',
         error: err.message
