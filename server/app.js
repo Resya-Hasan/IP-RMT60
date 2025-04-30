@@ -12,11 +12,6 @@ const port = 3000
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!')
-// })
-
-
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
@@ -30,6 +25,7 @@ app.get('/jobs', JobsController.getJobs)
 app.get('/jobs/:id', JobsController.getJobsById)
 
 app.post('/roadmaps/generate/:id', RoadmapController.generateRoadmap)
+app.get('/roadmaps', RoadmapController.getRoadmap)
 
 app.use(errorHandler)
 

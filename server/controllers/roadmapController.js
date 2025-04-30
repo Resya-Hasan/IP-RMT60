@@ -1,6 +1,7 @@
 const { GoogleGenAI } = require("@google/genai");
 const axios = require("axios");
 const loginApi = require("../helpers/loginApi");
+const { Roadmap } = require("../models");
 
 module.exports = class RoadmapController {
     static async generateRoadmap(req, res, next) {
@@ -17,18 +18,6 @@ module.exports = class RoadmapController {
 
             const jobTitle = job.title;
             const jobDescription = job.description;
-
-            const formatOutput = {
-                "careerRoadmap": [
-                    {
-                        "step": 1,
-                        "title": "string",
-                        "description": "string",
-                        "duration": "string",
-                        "skills": ["string"]
-                    }
-                ]
-            }
 
             const prompt = `
 Kamu adalah asisten AI profesional yang menghasilkan roadmap karier dalam format JSON. Buat roadmap agar seseorang bisa bekerja sebagai "${jobTitle}", berdasarkan deskripsi berikut:
@@ -66,7 +55,27 @@ Ikuti **format JSON persis** seperti ini (dengan kunci yang **harus sama persis*
 
             const jsonResponse = JSON.parse(rawText);
 
+            const roadmap = await Roadmap.create({
+                UserId: req.user.id,
+                title: jobTitle,
+                roadmap: jsonResponse,
+            });
+
             res.status(200).json(jsonResponse);
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    static async getRoadmap(req, res, next) {
+        try {
+            const roadmaps = await Roadmap.findAll({
+                where: {
+                    UserId: req.user.id,
+                },
+            });
+
+            res.status(200).json(roadmaps);
         } catch (err) {
             next(err);
         }
