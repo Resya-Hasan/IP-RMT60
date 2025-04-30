@@ -14,18 +14,18 @@ const authentication = async (req, res, next) => {
 
         const validToken = verifyToken(token)
 
-        console.log(validToken, '<<< validToken')
+        // console.log(validToken, '<<< validToken')
 
         const user = await User.findByPk(validToken.user.id)
 
-        console.log(user, '<<< user')
+        // console.log(user, '<<< user')
 
         if (!user) {
             throw { name: 'Unauthorized', message: 'Invalid Token' }
         }
 
         req.user = user
-        console.log(req.user)
+        // console.log(req.user)
 
         next()
     } catch (err) {
