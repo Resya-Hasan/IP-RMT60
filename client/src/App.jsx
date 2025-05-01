@@ -1,11 +1,15 @@
-import { BrowserRouter } from 'react-router';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import LandingPage from './pages/LandingPage';
+import SignInPage from './pages/SignIn';
 
 function App() {
 
   return (
     <BrowserRouter>
-      <LandingPage />
+      <Routes >
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/signIn" element={<SignInPage />} />
+      </Routes>
     </BrowserRouter>
   )
 }
