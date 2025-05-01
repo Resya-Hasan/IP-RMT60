@@ -1,31 +1,30 @@
-import { useEffect, useState } from "react"
-import handleError from "../helpers/handleError"
-import http from "../helpers/http"
-
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchJobs } from "../redux/jobSlice"
+import Card from "../component/Card"
 
 const HomePage = () => {
-    const [jobs, setJobs] = useState([])
+  const dispatch = useDispatch()
+  const jobs = useSelector(state => state.jobs.data)
 
-    const fetchJobs = async () => {
-        try {
-            const { data } = await http({
-                method: 'GET',
-                url: '/jobs'
-            })
-            console.log(data)
-        }catch(err) {
-            handleError(err)
-        }
-    }
+  useEffect(() => {
+    dispatch(fetchJobs())
+  }, [])
 
-    useEffect(() => {
-        fetchJobs()
-    }, [])
-    return (
-        <>
-            <h1>halo</h1>
-        </>
-    )
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 m-4 mx-40">
+      {jobs.map((job) => (
+        <div key={job.id} className="flex justify-center">
+          <Card
+            title={job.title}
+            jobType={job.jobType}
+            address={job.User?.address}
+            imageUrl={job.imgUrl}
+          />
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default HomePage
