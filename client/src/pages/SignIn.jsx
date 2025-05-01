@@ -1,11 +1,42 @@
-
+import { useState } from "react";
+import http from "../helpers/http";
+import handleError from "../helpers/handleError";
+import { useNavigate } from "react-router";
 
 const SignInPage = () => {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const navigate = useNavigate()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const { data } = await http({
+                method: 'POST',
+                url: '/login',
+                data: {
+                    email,
+                    password
+                }
+            })
+            console.log(data)
+            localStorage.setItem('access_token', data.access_token)
+            navigate('/')
+        } catch (err) {
+            handleError(err)
+        }
+    }
+
     return (
         <>
             <div className="w-screen h-screen flex">
                 <div className="w-1/2 h-full flex items-center justify-center">
-                    <form className="bg-white w-full h-full flex flex-col items-center justify-center ">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="bg-white w-full h-full flex flex-col items-center justify-center "
+                    >
                         <h1 className="text-4xl font-bold mb-4">Sign In</h1>
                         <div className="flex flex-col mb-4 gap-2">
                             <label>Email</label>
@@ -13,6 +44,8 @@ const SignInPage = () => {
                                 type="email"
                                 placeholder="Enter your email"
                                 className="w-75 py-1 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="flex flex-col mb-4 gap-2">
@@ -20,6 +53,8 @@ const SignInPage = () => {
                             <input
                                 type="password"
                                 className="w-75 py-1 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
                         <button type="submit"
