@@ -7,7 +7,6 @@ import handleError from "../helpers/handleError";
 const JobDetail = () => {
     const { id } = useParams();
     const [job, setJob] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [roadmap, setRoadmap] = useState(null);
     const [generating, setGenerating] = useState(false);
 
@@ -21,7 +20,6 @@ const JobDetail = () => {
                 }
             });
             setJob(data);
-            setLoading(false);
         } catch (err) {
             handleError(err);
         }
@@ -38,7 +36,6 @@ const JobDetail = () => {
                 }
             });
             setRoadmap(data.careerRoadmap);
-            setLoading(false);
 
         } catch (err) {
             handleError(err);
@@ -49,7 +46,6 @@ const JobDetail = () => {
         fetchJobDetail();
     }, []);
 
-    if (loading) return <p className="text-center mt-10">Loading...</p>;
     if (!job) return null;
 
     return (

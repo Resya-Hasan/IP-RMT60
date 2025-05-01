@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import AuthLayout from './layout/AuthLayout';
 import JobDetail from './pages/DetailJob';
+import MyRoadmaps from './pages/MyRoadmaps';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" element={<AuthLayout />} >
             <Route index element={<HomePage />} />
             <Route path="/detail-job/:id" element={<JobDetail />} />
+            <Route path="/my-roadmaps" element={<MyRoadmaps />} />
           </Route>
         </Routes>
       </BrowserRouter>
