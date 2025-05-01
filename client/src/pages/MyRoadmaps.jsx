@@ -32,7 +32,7 @@ const MyRoadmaps = () => {
                 <h1 className="text-2xl font-bold mb-4">My Roadmaps</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {roadmaps.map((roadmap) => (
-                        <CardRoadmap key={roadmap.id} title={roadmap.title} description={roadmap.description} createdAt={roadmap.createdAt} />
+                        <CardRoadmap key={roadmap.id} id={roadmap.id} title={roadmap.title} description={roadmap.description} createdAt={roadmap.createdAt} />
                     ))}
                 </div>
             </div>

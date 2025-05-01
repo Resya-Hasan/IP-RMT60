@@ -8,6 +8,7 @@ import store from './redux/store';
 import AuthLayout from './layout/AuthLayout';
 import JobDetail from './pages/DetailJob';
 import MyRoadmaps from './pages/MyRoadmaps';
+import DetailRoadmap from './pages/DetailRoadmap';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="/detail-job/:id" element={<JobDetail />} />
             <Route path="/my-roadmaps" element={<MyRoadmaps />} />
+            <Route path="/my-roadmaps/:id" element={<DetailRoadmap />} />
           </Route>
         </Routes>
       </BrowserRouter>
