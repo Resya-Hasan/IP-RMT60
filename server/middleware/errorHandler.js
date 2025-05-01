@@ -22,7 +22,13 @@ const errorHandler = (err, req, res, next) => {
     }
 
     if (err.name === 'notFound') {
-        return res.status(403).json({
+        return res.status(404).json({
+            message: err.message
+        })
+    }
+
+    if (err.name === 'BadRequest') {
+        return res.status(400).json({
             message: err.message
         })
     }

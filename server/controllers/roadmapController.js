@@ -42,6 +42,7 @@ Ikuti **format JSON persis** seperti ini (dengan kunci yang **harus sama persis*
 - Gunakan hanya kunci: step, title, description, duration, skills.
 - Hanya kirim JSON murni, tidak ada teks tambahan apa pun.
 - Format dan struktur **harus identik** seperti contoh di atas, hanya isinya yang berbeda.
+- dan gunakan bahasa Indonesia.
 `;
 
             const resAi = await ai.models.generateContent({

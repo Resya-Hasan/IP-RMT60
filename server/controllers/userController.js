@@ -35,9 +35,10 @@ module.exports = class UserController {
                 throw { name: 'Unauthorized', message: 'Invalid email or password' }
             }
 
-            console.log(user)
+            console.log(user.dataValues.id, "<<<< user")
 
-            const accessToken = signToken(user)
+            const accessToken = signToken(user.dataValues)
+            console.log(accessToken, "<<<< accessToken")
 
             res.status(200).json({ access_token: accessToken })
         } catch(err) {

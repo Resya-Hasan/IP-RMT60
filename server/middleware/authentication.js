@@ -4,7 +4,7 @@ const { User } = require("../models");
 const authentication = async (req, res, next) => {
     try {
         const { authorization } = req.headers
-        // console.log(req.headers)
+        console.log(req.headers)
 
         if (!authorization) {
             throw { name: 'Unauthorized', message: 'Invalid Token' }
@@ -14,9 +14,9 @@ const authentication = async (req, res, next) => {
 
         const validToken = verifyToken(token)
 
-        // console.log(validToken, '<<< validToken')
+        console.log(validToken, '<<< validToken')
 
-        const user = await User.findByPk(validToken.user.id)
+        const user = await User.findByPk(validToken.id)
 
         // console.log(user, '<<< user')
 

@@ -6,9 +6,11 @@ const UserController = require('./controllers/userController')
 const authentication = require('./middleware/authentication')
 const JobsController = require('./controllers/jobsController')
 const RoadmapController = require('./controllers/roadmapController')
+const cors = require('cors')
 const app = express()
 const port = 3000
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
