@@ -5,6 +5,8 @@ import SignUpPage from './pages/SignUp';
 import HomePage from './pages/HomePage';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import AuthLayout from './layout/AuthLayout';
+import JobDetail from './pages/DetailJob';
 
 function App() {
 
@@ -12,10 +14,14 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Routes >
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/landingPage" element={<LandingPage />} />
           <Route path="/signIn" element={<SignInPage />} />
           <Route path="/signUp" element={<SignUpPage />} />
-          <Route path="/home" element={<HomePage />} />
+
+          <Route path="/" element={<AuthLayout />} >
+            <Route index element={<HomePage />} />
+            <Route path="/detail-job/:id" element={<JobDetail />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </Provider>

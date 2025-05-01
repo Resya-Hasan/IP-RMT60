@@ -6,7 +6,13 @@ export const fetchJobs = createAsyncThunk(
   "jobs/fetchJobs",
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await http.get("/jobs")
+      const { data } = await http({
+        method: "GET",
+        url: "/jobs",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`
+        }
+      })
       return data
     } catch (err) {
       handleError(err)

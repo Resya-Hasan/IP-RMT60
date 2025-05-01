@@ -16,6 +16,7 @@ const HomePage = () => {
       {jobs.map((job) => (
         <div key={job.id} className="flex justify-center">
           <Card
+            id={job.id}
             title={job.title}
             jobType={job.jobType}
             address={job.User?.address}

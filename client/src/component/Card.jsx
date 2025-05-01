@@ -1,9 +1,9 @@
 import { Link } from "react-router";
 
 const Card = (props) => {
-    const { title, jobType, address, imageUrl } = props;
+    const { id, title, jobType, address, imageUrl } = props;
     return (
-        <Link className="border border-gray-200 rounded-lg shadow-md overflow-hidden w-75 hover:scale-102 transition-transform duration-300 ease-in-out cursor-pointer">
+        <Link to={`/detail-job/${id}`} className="border border-gray-200 rounded-lg shadow-md overflow-hidden w-75 hover:scale-102 transition-transform duration-300 ease-in-out cursor-pointer">
             <div className="relative">
                 <img
                     src={imageUrl}
