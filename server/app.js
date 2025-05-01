@@ -1,4 +1,6 @@
-require('dotenv').config()
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
 
 const express = require('express')
 const errorHandler = require('./middleware/errorHandler')
@@ -8,7 +10,6 @@ const JobsController = require('./controllers/jobsController')
 const RoadmapController = require('./controllers/roadmapController')
 const cors = require('cors')
 const app = express()
-const port = 3000
 
 app.use(cors())
 app.use(express.json())
@@ -33,6 +34,4 @@ app.delete('/roadmaps/:id', RoadmapController.deleteRoadmap)
 
 app.use(errorHandler)
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+module.exports = app
