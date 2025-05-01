@@ -45,11 +45,11 @@ const LandingPage = () => {
                         Temukan Jalur Karier Aman dan Stabil
                     </h1>
                     <p className="text-white text-lg md:text-xl mb-6 max-w-2xl drop-shadow-md text-center">
-                        Kerja Aman membantumu membangun roadmap karier, mendapatkan rekomendasi pekerjaan, dan berkonsultasi dengan AI untuk masa depan profesional yang lebih cerah.
+                        Jalurku membantumu membangun roadmap karier, mendapatkan rekomendasi pekerjaan, dan berkonsultasi dengan AI untuk masa depan profesional yang lebih cerah.
                     </p>
-                    <button className="bg-purple-600 w-40 h-12 text-white font-bold py-2 px-3 text-lg rounded-md cursor-pointer hover:bg-purple-700 transition duration-300 ease-in-out z-10">
+                    <Link to="/home" className="bg-purple-600 w-40 h-12 text-white text-center font-bold py-2 px-3 text-lg rounded-md cursor-pointer hover:bg-purple-700 transition duration-300 ease-in-out z-10">
                         Get Started
-                    </button>
+                    </Link>
                 </div>
             </div>
         </>
