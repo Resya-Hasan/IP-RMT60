@@ -1,7 +1,13 @@
-import { NavLink } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        localStorage.removeItem('access_token')
+        navigate('/signIn')
+    }
+
     return (
         <>
             <nav className="border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
@@ -45,6 +51,15 @@ const Navbar = () => {
                                     My Roadmaps
                                 </NavLink>
                             </li>
+
+                            <button
+                                type="button"
+                                className="text-white hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent cursor-pointer"
+                                onClick={handleLogout}
+                            >
+                                Log out
+                            </button>
+
                         </ul>
                     </div>
                 </div>

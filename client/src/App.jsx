@@ -9,6 +9,7 @@ import AuthLayout from './layout/AuthLayout';
 import JobDetail from './pages/DetailJob';
 import MyRoadmaps from './pages/MyRoadmaps';
 import DetailRoadmap from './pages/DetailRoadmap';
+import AuthoToken from './layout/AuthoToken';
 
 function App() {
 
@@ -16,9 +17,11 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <Routes >
-          <Route path="/landingPage" element={<LandingPage />} />
-          <Route path="/signIn" element={<SignInPage />} />
-          <Route path="/signUp" element={<SignUpPage />} />
+          <Route element={<AuthoToken />} >
+            <Route path="/landingPage" element={<LandingPage />} />
+            <Route path="/signIn" element={<SignInPage />} />
+            <Route path="/signUp" element={<SignUpPage />} />
+          </Route>
 
           <Route path="/" element={<AuthLayout />} >
             <Route index element={<HomePage />} />
