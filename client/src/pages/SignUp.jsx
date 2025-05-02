@@ -1,7 +1,7 @@
 import { useState } from "react";
 import http from "../helpers/http";
 import handleError from "../helpers/handleError";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const SignUpPage = () => {
@@ -88,8 +88,11 @@ const SignUpPage = () => {
                         <button type="submit"
                             className="bg-purple-500 text-white py-1 px-4 rounded w-75 cursor-pointer hover:bg-purple-600 transition duration-300 ease-in-out"
                         >
-                            Sign in
+                            Sign Up
                         </button>
+                        <div>
+                            <p>have account? <Link to="/signIn" className="text-sky-500">sign in</Link></p>
+                        </div>
                     </form>
                 </div>
             </div>
