@@ -58,7 +58,7 @@ const JobDetail = () => {
 
             <button
                 onClick={generateRoadmap}
-                className="mt-6 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
+                className="mt-6 bg-sky-600 text-white px-6 py-2 mr-4 rounded hover:bg-sky-700 transition cursor-pointer"
                 disabled={generating}
             >
                 {generating ? "Generating..." : "Generate Roadmap"}
@@ -84,7 +84,7 @@ const JobDetail = () => {
 
             <Link
                 to="/"
-                className="mt-6 inline-block bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700 transition"
+                className="mt-6 inline-block border border-sky-600 text-sky-600 px-6 py-2 rounded hover:bg-sky-600 hover:text-white transition"
             >
                 Kembali
             </Link>
