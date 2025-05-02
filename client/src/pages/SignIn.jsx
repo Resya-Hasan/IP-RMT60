@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import http from "../helpers/http";
 import handleError from "../helpers/handleError";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const SignInPage = () => {
     const navigate = useNavigate()
@@ -92,6 +92,9 @@ const SignInPage = () => {
                             Sign in
                         </button>
                         <div id="buttonDiv" className="w-75 mt-4"></div>
+                        <div>
+                            <p>don't have account? <Link to="/signUp" className="text-sky-500">sign up</Link></p>
+                        </div>
                     </form>
                 </div>
                 <div className="w-1/2 flex items-center justify-center bg-stone-100">
