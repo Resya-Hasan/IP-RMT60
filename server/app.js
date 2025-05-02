@@ -21,6 +21,7 @@ app.get('/', (req, res) => {
 
 app.post('/register', UserController.register)
 app.post('/login', UserController.login)
+app.post('/login/google', UserController.loginGoogle)
 
 app.use(authentication)
 

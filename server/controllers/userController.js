@@ -1,19 +1,66 @@
 const { User } = require('../models')
 const { comparePassword } = require('../helpers/bcrypt')
 const { signToken } = require('../helpers/jwt')
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client();
 
 module.exports = class UserController {
-    static async register (req, res, next) {
-        try{
-            const user = await User.create(req.body)
-            res.status(201).json({message: 'register success'})
-        } catch(err) {
+    static async loginGoogle(req, res, next) {
+        try {
+            const { googleToken } = req.body
+
+            const ticket = await client.verifyIdToken({
+                idToken: googleToken,
+                audience: process.env.CLIENT_ID,
+            });
+
+            const payload = ticket.getPayload();
+            const userid = payload['sub'];
+
+            console.log(payload, '<<<< google token')
+
+            const user = await User.findOne({
+                where: {
+                    email: payload.email
+                }
+            })
+
+            if (!user) {
+                const newUser = await User.create({
+                    email: payload.email,
+                    password: Math.random().toString(),
+                    username: payload.name
+                })
+                console.log(newUser, '<<<< new user')
+                const accessToken = signToken(newUser.dataValues)
+                console.log(accessToken, "<<<< accessToken")
+                res.status(200).json({ access_token: accessToken })
+            } else {
+                console.log(user, '<<<< user')
+                
+                const accessToken = signToken(user.dataValues)
+                console.log(accessToken, "<<<< accessToken")
+                res.status(200).json({ access_token: accessToken })
+            }
+
+
+
+        } catch (err) {
             next(err)
         }
     }
 
-    static async login (req, res, next) {
-        try{
+    static async register(req, res, next) {
+        try {
+            const user = await User.create(req.body)
+            res.status(201).json({ message: 'register success' })
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async login(req, res, next) {
+        try {
             const { email, password } = req.body
 
             if (!email || !password) {
@@ -41,7 +88,7 @@ module.exports = class UserController {
             console.log(accessToken, "<<<< accessToken")
 
             res.status(200).json({ access_token: accessToken })
-        } catch(err) {
+        } catch (err) {
             next(err)
         }
     }
