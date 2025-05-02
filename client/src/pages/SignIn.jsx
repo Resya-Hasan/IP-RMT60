@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import http from "../helpers/http";
 import handleError from "../helpers/handleError";
 import { useNavigate } from "react-router";
 
 const SignInPage = () => {
     const navigate = useNavigate()
-    
+
     if (localStorage.getItem('access_token')) {
         navigate('/')
     }
-    
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -33,10 +33,35 @@ const SignInPage = () => {
         }
     }
 
+    async function handleCredentialResponse(response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+        const { data } = await http({
+            method: 'POST',
+            url: '/login/google',
+            data: {
+                googleToken: response.credential
+            }
+        })
+        localStorage.setItem('access_token', data.access_token)
+        navigate('/')
+    }
+
+    useEffect(() => {
+        window.google.accounts.id.initialize({
+            client_id: import.meta.env.VITE_CLIENT_ID,
+            callback: handleCredentialResponse
+        });
+        window.google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+        );
+        window.google.accounts.id.prompt(); // also display the One Tap dialog
+    }, [])
+
     return (
         <>
             <div className="w-screen h-screen flex">
-                <div className="w-1/2 h-full flex items-center justify-center">
+                <div className="w-1/2 h-full flex flex-col items-center justify-center">
                     <form
                         onSubmit={handleSubmit}
                         className="bg-white w-full h-full flex flex-col items-center justify-center "
@@ -66,6 +91,7 @@ const SignInPage = () => {
                         >
                             Sign in
                         </button>
+                        <div id="buttonDiv" className="w-75 mt-4"></div>
                     </form>
                 </div>
                 <div className="w-1/2 flex items-center justify-center bg-stone-100">
